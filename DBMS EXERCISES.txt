@@ -1,0 +1,721 @@
+
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL NUMBER(4)
+ FIRSTNAME                                 NOT NULL VARCHAR2(20)
+ MIDDLENAME                                         VARCHAR2(20)
+ LASTNAME                                  NOT NULL VARCHAR2(20)
+ MAILID                                    NOT NULL VARCHAR2(20)
+ MOBNO                                              NUMBER(10)
+
+SQL> create table address(regno number(4),street varchar(30),city char (10) default 'hyderabad',foreign key (regno) references student (REGNO));
+
+Table created.
+
+SQL> DESC address;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(4)
+ STREET                                             VARCHAR2(30)
+ CITY                                               CHAR(10)
+
+SQL> alter table address add(pincode number(10));
+
+Table altered.
+
+SQL> desc address;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(4)
+ STREET                                             VARCHAR2(30)
+ CITY                                               CHAR(10)
+ PINCODE                                            NUMBER(10)
+
+SQL> insert into address values (283,'hahah','bxzjsxhxhg',388398);
+
+1 row created.
+
+SQL> select * from address;
+
+     REGNO STREET                         CITY          PINCODE
+---------- ------------------------------ ---------- ----------
+       283 hahah                          bxzjsxhxhg     388398
+
+SQL> update address set city = hyderabad;
+update address set city = hyderabad
+                          *
+
+
+SQL> update address set city = 'hyderabad';
+
+1 row updated.
+
+SQL> select * from address;
+
+     REGNO STREET                         CITY          PINCODE
+---------- ------------------------------ ---------- ----------
+       283 hahah                          hyderabad      388398
+
+SQL>
+SQL> create table programmer (empno number(10) unique,projid number(3),lastname char(30),firstname varchar(30),hiredate date,language char(15),taskno number (2),privilege varchar(25));
+
+Table created.
+
+SQL> desc programmer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(10)
+ PROJID                                             NUMBER(3)
+ LASTNAME                                           CHAR(30)
+ FIRSTNAME                                          VARCHAR2(30)
+ HIREDATE                                           DATE
+ LANGUAGE                                           CHAR(15)
+ TASKNO                                             NUMBER(2)
+ PRIVILEGE                                          VARCHAR2(25)
+
+
+
+
+
+
+
+
+SQL> alter table programmer modify(projid varchar(5));
+
+Table altered.
+
+SQL> desc programmer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(10)
+ PROJID                                             VARCHAR2(5)
+ LASTNAME                                           CHAR(30)
+ FIRSTNAME                                          VARCHAR2(30)
+ HIREDATE                                           DATE
+ LANGUAGE                                           CHAR(15)
+ TASKNO                                             NUMBER(2)
+ PRIVILEGE                                          VARCHAR2(25)
+
+SQL> insert into programmer (empno,projid,lastname,firstname,hiredate,language,taskno,privilege) values
+  2  (201,'npr','gupta','saurav',to_date('01011995','mmddyyyy'),'vb',52,'secret');
+
+1 row created.
+
+SQL> select * from programmer;
+
+     EMPNO PROJI LASTNAME                       FIRSTNAME
+---------- ----- ------------------------------ ------------------------------
+HIREDATE  LANGUAGE            TASKNO PRIVILEGE
+--------- --------------- ---------- -------------------------
+       201 npr   gupta                          saurav
+01-JAN-95 vb                      52 secret
+
+
+
+
+
+
+
+
+SQL> insert into programmer (empno,projid,lastname,firstname,hiredate,language,taskno,privilege) values
+  2  (390,'kcw','ghosh','pinky',to_date('01051993','mmddyyyy'),'java',11,'topsecret');
+
+1 row created.
+
+
+
+
+
+
+SQL> insert into programmer (empno,projid,lastname,firstname,hiredate,language,taskno,privilege) values
+  2  (789,'rnc','agarwal','praveen',to_date('08311998','mmddyyyy'),'vb',11,'secret');
+
+1 row created.
+
+SQL> select * from programmer;
+
+     EMPNO PROJI LASTNAME                       FIRSTNAME
+---------- ----- ------------------------------ ------------------------------
+HIREDATE  LANGUAGE            TASKNO PRIVILEGE
+--------- --------------- ---------- -------------------------
+       201 npr   gupta                          saurav
+01-JAN-95 vb                      52 secret
+
+       390 kcw   ghosh                          pinky
+05-JAN-93 java                    11 topsecret
+
+       789 rnc   agarwal                        praveen
+31-AUG-98 vb                      11 secret
+
+
+
+
+
+SQL> create table weather (city char(20) ,state char(20),high number(4),low number(4));
+
+Table created.
+
+SQL> desc weather;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CITY                                               CHAR(20)
+ STATE                                              CHAR(20)
+ HIGH                                               NUMBER(4)
+ LOW                                                NUMBER(4)
+
+SQL> insert into weather values('calcutta','westbengal',105,90);
+
+1 row created.
+
+SQL> insert into weather values('trivandrum','kerala',101,92);
+
+1 row created.
+
+SQL> insert into weather values('mumbai','maharashtra',88,69);
+
+1 row created.
+
+SQL> select * from weather;
+
+CITY                 STATE                      HIGH        LOW
+-------------------- -------------------- ---------- ----------
+calcutta             westbengal                  105         90
+trivandrum           kerala                      101         92
+mumbai               maharashtra                  88         69
+
+SQL> create table books(bookid number(10) primary key,title varchar(10),topicid varchar(10),publishername varchar(20),placeofpublication char(10),price number(10), purchasedate varchar(10),shellno number(10));
+
+Table created.
+
+SQL> desc books;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOKID                                    NOT NULL NUMBER(10)
+ TITLE                                              VARCHAR2(10)
+ TOPICID                                            VARCHAR2(10)
+ PUBLISHERNAME                                      VARCHAR2(20)
+ PLACEOFPUBLICATION                                 CHAR(10)
+ PRICE                                              NUMBER(10)
+ PURCHASEDATE                                       VARCHAR2(10)
+ SHELLNO                                            NUMBER(10)
+
+SQL> insert into books values (8293,'dbms','db1','prentice hall','mumbai',255,'1-1-1995',511);
+
+1 row created.
+
+SQL> insert into books values (5645,'dbms','db1','pearson education','mumbai',655,'1-5-1993',512);
+
+1 row created.
+
+SQL> select * from books;
+
+    BOOKID TITLE      TOPICID    PUBLISHERNAME        PLACEOFPUB      PRICE
+---------- ---------- ---------- -------------------- ---------- ----------
+PURCHASEDA    SHELLNO
+---------- ----------
+      8293 dbms       db1        prentice hall        mumbai            255
+1-1-1995          511
+
+      5645 dbms       db1        pearson education    mumbai            655
+1-5-1993          512
+
+
+SQL> update programmer set projid = 'niits' where empno = 201;
+
+1 row updated.
+
+SQL> select * from programmer;
+
+     EMPNO PROJI LASTNAME                       FIRSTNAME
+---------- ----- ------------------------------ ------------------------------
+HIREDATE  LANGUAGE            TASKNO PRIVILEGE
+--------- --------------- ---------- -------------------------
+       201 niits gupta                          saurav
+01-JAN-95 vb                      52 secret
+
+       390 kcw   ghosh                          pinky
+05-JAN-93 java                    11 topsecret
+
+       789 rnc   agarwal                        praveen
+31-AUG-98 vb                      11 secret
+
+
+
+
+
+
+
+SQL> update books set shellno ='510' where title = 'dbms';
+
+2 rows updated.
+
+SQL> alter table weather add(natureofclimate char(10));
+
+Table altered.
+
+SQL> desc weather;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CITY                                               CHAR(20)
+ STATE                                              CHAR(20)
+ HIGH                                               NUMBER(4)
+ LOW                                                NUMBER(4)
+ NATUREOFCLIMATE                                    CHAR(10)
+
+SQL> create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(20));
+
+Table created.
+
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(5)
+ FNAME                                              VARCHAR2(30)
+ LNAME                                              VARCHAR2(30)
+ ADDRESS                                            VARCHAR2(50)
+ PHONENO                                   NOT NULL NUMBER(20)
+ CITY                                               VARCHAR2(20)
+ COUNTRY                                            VARCHAR2(20)
+ DATEFIRSTPURCHASED                                 DATE
+ SUPPLIERID                                         NUMBER(20)
+
+SQL> insert into customer values (1001,'das','jeyaseelan','119,park avenue,II street',9841093428,'coimbatore','india',to_date('10012004','ddmmyyyy'),1);
+
+1 row created.
+
+SQL> select*from customer;
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+      1001 das                            jeyaseelan
+119,park avenue,II street                          9841093428
+coimbatore           india                10-JAN-04          1
+
+
+SQL> insert into customer values (2001,'gopi','govindraj','241,I floor,kamaraj street ,madippakkam',9444124590,'coimbatore','india',to_date('25032005','ddmmyyyy'),4);
+
+1 row created.
+
+SQL> create table supplier(supplierid number(3), sname varchar(20),scity varchar(20),sphone number(10),email varchar(20));
+
+Table created.
+
+SQL> desc supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUPPLIERID                                         NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ SCITY                                              VARCHAR2(20)
+ SPHONE                                             NUMBER(10)
+ EMAIL                                              VARCHAR2(20)
+
+SQL> insert into supplier values(1,'dilip','chennai',8999911111,'dilip@abc.co.in');
+
+1 row created.
+
+SQL> insert into supplier values(2,'tarun','madurai',8999900000,'tarun@xyz.com');
+
+1 row created.
+
+SQL> insert into supplier values(3,'naresh','coimbatore',8999922222,'g.naresh@xyzl.com');
+
+1 row created.
+
+SQL> insert into supplier values(4,'ganesan','trichy',8999933333,'ganesan_83@ijk.com');
+
+1 row created.
+
+SQL> select * from supplier;
+
+SUPPLIERID SNAME                SCITY                    SPHONE
+---------- -------------------- -------------------- ----------
+EMAIL
+--------------------
+         1 dilip                chennai              8999911111
+dilip@abc.co.in
+
+         2 tarun                madurai              8999900000
+tarun@xyz.com
+
+         3 naresh               coimbatore           8999922222
+g.naresh@xyzl.com
+
+
+SUPPLIERID SNAME                SCITY                    SPHONE
+---------- -------------------- -------------------- ----------
+EMAIL
+--------------------
+         4 ganesan              trichy               8999933333
+ganesan_83@ijk.com
+
+
+SQL> drop table customer;
+
+Table dropped.
+
+SQL> create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid));
+create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid))
+                                                                                                                                                                                                                                                                        *
+
+
+SQL> create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid));
+create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid))
+                                                                                                                                                                                                                                                                        *
+
+
+
+SQL> alter table supplier modify(supplierid primary key);
+
+Table altered.
+
+SQL> create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid));
+create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplier(supplierid))
+                                                                                                                                                                                                                                                                        *
+
+
+
+SQL> create table customer(custid number(5) primary key, fname varchar(30),lname varchar(30),address varchar(50),phoneno number(20) not null,city varchar(20),country varchar(20),datefirstpurchased date , supplierid number(2),foreign key(supplierid) references supplier(supplierid));
+
+Table created.
+
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(5)
+ FNAME                                              VARCHAR2(30)
+ LNAME                                              VARCHAR2(30)
+ ADDRESS                                            VARCHAR2(50)
+ PHONENO                                   NOT NULL NUMBER(20)
+ CITY                                               VARCHAR2(20)
+ COUNTRY                                            VARCHAR2(20)
+ DATEFIRSTPURCHASED                                 DATE
+ SUPPLIERID                                         NUMBER(2)
+
+SQL> desc supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SUPPLIERID                                NOT NULL NUMBER(3)
+ SNAME                                              VARCHAR2(20)
+ SCITY                                              VARCHAR2(20)
+ SPHONE                                             NUMBER(10)
+ EMAIL                                              VARCHAR2(20)
+
+SQL> insert into customer values (1001,'das','jeyaseelan','119,park avenue,II street',9841093428,'coimbatore','india',to_date('10012004','ddmmyyyy'),1);
+
+1 row created.
+
+SQL> insert into customer values (2001,'gopi','govindraj','241,I floor,kamaraj street ,madippakkam',9444124590,'coimbatore','india',to_date('25032005','ddmmyyyy'),4);
+
+1 row created.
+
+SQL> select * from customer;
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+      1001 das                            jeyaseelan
+119,park avenue,II street                          9841093428
+coimbatore           india                10-JAN-04          1
+
+      2001 gopi                           govindraj
+241,I floor,kamaraj street ,madippakkam            9444124590
+coimbatore           india                25-MAR-05          4
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+
+
+SQL> insert into customer values (1201,'dilip','kishore','43,II avenue,anna nagar',999723534','bangalore','india',to_date('20082004','ddmmyyyy'),2);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into customer values (1201,'dilip','kishore','43,II avenue,anna nagar',999723534,'bangalore','india',to_date('20082004','ddmmyyyy'),2);
+
+1 row created.
+
+SQL> select* from customer;
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+      1001 das                            jeyaseelan
+119,park avenue,II street                          9841093428
+coimbatore           india                10-JAN-04          1
+
+      2001 gopi                           govindraj
+241,I floor,kamaraj street ,madippakkam            9444124590
+coimbatore           india                25-MAR-05          4
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+
+      1201 dilip                          kishore
+43,II avenue,anna nagar                             999723534
+bangalore            india                20-AUG-04          2
+
+
+SQL> update customer set city = 'chennai' where custid = 2001;
+
+1 row updated.
+
+SQL> select*from customer;
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+      1001 das                            jeyaseelan
+119,park avenue,II street                          9841093428
+coimbatore           india                10-JAN-04          1
+
+      2001 gopi                           govindraj
+241,I floor,kamaraj street ,madippakkam            9444124590
+chennai              india                25-MAR-05          4
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+
+      1201 dilip                          kishore
+43,II avenue,anna nagar                             999723534
+bangalore            india                20-AUG-04          2
+
+
+SQL> create table item (itemid number(3) primary key,itemname varchar(20) not null,supplierid number(4),minqty number(20) not null,maxqty number(20) not  null,price number(5,2));
+
+Table created.
+
+SQL> insert into item values(20,'pears soap',4,7,20,30);
+
+1 row created.
+
+SQL> insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79);
+insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79)
+                           *
+ERROR at line 1:
+ORA-12899: value too large for column "SCOTT"."ITEM"."ITEMNAME" (actual: 25,
+maximum: 20)
+
+
+SQL> insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79);
+insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79)
+                           *
+ERROR at line 1:
+ORA-12899: value too large for column "SCOTT"."ITEM"."ITEMNAME" (actual: 25,
+maximum: 20)
+
+
+SQL> alter table item modify(itemname varchar(40));
+
+Table altered.
+
+SQL> insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79);
+
+1 row created.
+
+SQL> insert into item values(22,'ponds powder 400g',3,6,25,106);
+
+1 row created.
+
+SQL> insert into item values(24,'reynolds pen-black,1,10,30,15);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into item values(24,'reynolds pen-black',1,10,30,15);
+
+1 row created.
+
+SQL> insert into item values(25,'mysore sandal soap',4,7,25,25);
+
+1 row created.
+
+
+
+
+SQL> drop table item;
+
+Table dropped.
+
+SQL> create table item (itemid number(3) primary key,itemname varchar(20) not null,supplierid number(4),minqty number(20) not null,maxqty number(20) not  null,price number(5,2),foreign key(supplierid) references supplier (supplierid));
+
+Table created.
+
+SQL> insert into item values(20,'pears soap',4,7,20,30);
+
+1 row created.
+
+SQL> alter table item modify(itemname varchar(40));
+
+Table altered.
+
+SQL> insert into item values(21,'v.v.d. coconut oil 200 ml',2,8,15,79);
+
+1 row created.
+
+SQL> insert into item values(22,'ponds powder 400g',3,6,25,106);
+
+1 row created.
+
+SQL> insert into item values(24,'reynolds pen-black',1,10,30,15);
+
+1 row created.
+
+SQL> insert into item values(25,'mysore sandal soap',4,7,25,25);
+
+1 row created.
+
+
+
+
+
+
+SQL> desc item;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEMID                                    NOT NULL NUMBER(3)
+ ITEMNAME                                  NOT NULL VARCHAR2(40)
+ SUPPLIERID                                         NUMBER(4)
+ MINQTY                                    NOT NULL NUMBER(20)
+ MAXQTY                                    NOT NULL NUMBER(20)
+ PRICE                                              NUMBER(5,2)
+
+SQL> create table orders(orderid number(2) primary key,orderdate date ,custid number(5),quantity number(20) check(quantity>0),itemid number(20),foreign key (itemid) references item(itemid));
+
+Table created.
+
+SQL> insert into orders values (1,to_date('12042004','ddmmyyyy'),1001,30,25);
+
+1 row created.
+
+SQL> insert into orders values (2,to_date('06052005','ddmmyyyy'),1202,38,24);
+
+1 row created.
+
+SQL> insert into orders values (3,to_date('16122006','ddmmyyyy'),1220,10,22);
+
+1 row created.
+
+
+
+
+SQL> insert into orders values (4,to_date('21052004','ddmmyyyy'),1233,12,21);
+
+1 row created.
+
+
+SQL> select*from supplier;
+
+SUPPLIERID SNAME                SCITY                    SPHONE
+---------- -------------------- -------------------- ----------
+EMAIL
+--------------------
+         1 dilip                chennai              8999911111
+dilip@abc.co.in
+
+         2 tarun                madurai              8999900000
+tarun@xyz.com
+
+         3 naresh               coimbatore           8999922222
+g.naresh@xyzl.com
+
+
+SUPPLIERID SNAME                SCITY                    SPHONE
+---------- -------------------- -------------------- ----------
+EMAIL
+--------------------
+         4 ganesan              trichy               8999933333
+ganesan_83@ijk.com
+
+
+SQL> select * from customer;
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+      1001 das                            jeyaseelan
+119,park avenue,II street                          9841093428
+coimbatore           india                10-JAN-04          1
+
+      2001 gopi                           govindraj
+241,I floor,kamaraj street ,madippakkam            9444124590
+chennai              india                25-MAR-05          4
+
+    CUSTID FNAME                          LNAME
+---------- ------------------------------ ------------------------------
+ADDRESS                                               PHONENO
+-------------------------------------------------- ----------
+CITY                 COUNTRY              DATEFIRST SUPPLIERID
+-------------------- -------------------- --------- ----------
+
+      1201 dilip                          kishore
+43,II avenue,anna nagar                             999723534
+bangalore            india                20-AUG-04          2
+
+
+SQL> select*from item;
+
+    ITEMID ITEMNAME                                 SUPPLIERID     MINQTY
+---------- ---------------------------------------- ---------- ----------
+    MAXQTY      PRICE
+---------- ----------
+        20 pears soap                                        4          7
+        20         30
+
+        21 v.v.d. coconut oil 200 ml                         2          8
+        15         79
+
+        22 ponds powder 400g                                 3          6
+        25        106
+
+
+    ITEMID ITEMNAME                                 SUPPLIERID     MINQTY
+---------- ---------------------------------------- ---------- ----------
+    MAXQTY      PRICE
+---------- ----------
+        24 reynolds pen-black                                1         10
+        30         15
+
+        25 mysore sandal soap                                4          7
+        25         25
+
+
+SQL> select * from orders;
+
+   ORDERID ORDERDATE     CUSTID   QUANTITY     ITEMID
+---------- --------- ---------- ---------- ----------
+         1 12-APR-04       1001         30         25
+         2 06-MAY-05       1202         38         24
+         3 16-DEC-06       1220         10         22
+         4 21-MAY-04       1233         12         21
+
+SQL>
